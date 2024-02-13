@@ -5,7 +5,7 @@ import Link from "../Link/Link";
 
 function MyNav() {
   return (
-    <Navbar bg="dark" data-bs-theme="dark">
+    <Navbar bg="dark" data-bs-theme="dark" className="mb-5">
       <Container>
         <Nav className="me-auto">
           <Link
