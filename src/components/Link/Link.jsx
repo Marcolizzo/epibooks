@@ -1,4 +1,4 @@
-import classes from "./Link.css";
+import "./Link.module.css";
 
 function Link(props) {
   return (
