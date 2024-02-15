@@ -29,7 +29,6 @@ function Main() {
       book.title.toLowerCase().includes(input.toLowerCase())
     );
     setFilteredBooks(filtered);
-    console.log(filteredBooks);
   }
 
   // useEffect(() => {
@@ -41,7 +40,7 @@ function Main() {
       <InputSearch filterBooks={filterBooks}></InputSearch>
       <Container className="mt-5">
         <Row>
-          {(filteredBooks > 0 ? filteredBooks : books).map((book) => (
+          {(filteredBooks.length > 0 ? filteredBooks : books).map((book) => (
             <MyCard
               key={nanoid()}
               title={book.title}
