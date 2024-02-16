@@ -34,11 +34,6 @@ function Main() {
     setFilteredBooks(filtered);
   }
 
-  function changeBorder(e) {
-    const selectedCard = e.currentTarget;
-    selectedCard.classList.toggle("changeBorder");
-  }
-
   return (
     <>
       <InputSearch filterBooks={filterBooks}></InputSearch>
@@ -54,7 +49,6 @@ function Main() {
                 img={book.img}
                 price={book.price}
                 category={book.category}
-                onClick={changeBorder}
               />
             ))
           )}
