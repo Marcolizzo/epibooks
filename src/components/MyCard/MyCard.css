@@ -2,7 +2,10 @@
   width: 18rem;
 }
 
-/* .card:hover {
+.changeBorder {
+  border: solid rgb(4, 209, 4) 5px !important;
+}
+.card:hover {
   cursor: pointer;
-  border: rgb(4, 209, 4) 2px solid;
-} */
+  border: red 4px solid;
+}

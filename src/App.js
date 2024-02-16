@@ -1,14 +1,14 @@
 import MyNav from "./components/MyNav/MyNav";
 import MyFooter from "./components/MyFooter/MyFooter";
-import Welcome from "./components/Welcome/Welcome";
 import Main from "./components/Main/Main";
+import MyAlert from "./components/MyAlert/MyAlert";
 
 
 function App() {
   return (
     <>
       <MyNav />
-      <Welcome />
+      <MyAlert />
       <Main />
       <MyFooter />
     </>
