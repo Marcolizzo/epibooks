@@ -6,7 +6,9 @@ import { nanoid } from "nanoid";
 import InputSearch from "../InputSearch/InputSearch";
 
 function Main() {
-  const url = "https://epibooks.onrender.com/";
+  const url = "https://striveschool-api.herokuapp.com/books";
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk4MTMzZDQyNDc2YzAwMTg3NjUzYmQiLCJpYXQiOjE3MDgxNjg3NzIsImV4cCI6MTcwOTM3ODM3Mn0.h1crc0D5lyjALWkwViBS0eOJQR3BO3MLmuG_xRJj3yY";
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filteredBooks, setFilteredBooks] = useState([]);
@@ -15,7 +17,9 @@ function Main() {
     const fetch = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(url);
+        const res = await axios.get(url, {
+          headers: {'Authorization': `Bearer ${token}`}
+        });
         const twentyBooks = res.data.slice(0, 20);
 
         setLoading(false);
