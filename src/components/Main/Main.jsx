@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MyCard from "../MyCard/MyCard";
 import axios from "axios";
-import { Alert, Container, Row } from "react-bootstrap";
+import { Alert, Container, Row, Col } from "react-bootstrap";
 import { nanoid } from "nanoid";
 import InputSearch from "../InputSearch/InputSearch";
 
@@ -18,12 +18,13 @@ function Main() {
       setLoading(true);
       try {
         const res = await axios.get(url, {
-          headers: {'Authorization': `Bearer ${token}`}
+          headers: { Authorization: `Bearer ${token}` },
         });
         const twentyBooks = res.data.slice(0, 20);
 
         setLoading(false);
         setBooks(twentyBooks);
+        setFilteredBooks(twentyBooks);
       } catch (error) {
         console.error(error);
       }
@@ -32,29 +33,53 @@ function Main() {
   }, []);
 
   function filterBooks(input) {
-    const filtered = books.filter((book) =>
-      book.title.toLowerCase().includes(input.toLowerCase())
+    let filtered;
+
+    if (isInputEmpty(input)) {
+      setFilteredBooks(books);
+    } else {
+      filtered = books.filter((book) =>
+        book.title.toLowerCase().includes(input.toLowerCase())
+      );
+      setFilteredBooks(filtered);
+    }
+  }
+
+  function isInputEmpty(input) {
+    return input === "";
+  }
+
+  function noBookFound() {
+    return (
+      <Col>
+        <div className="text-center fs-1">No books found.</div>
+      </Col>
     );
-    setFilteredBooks(filtered);
+  }
+
+  function displayCards(books) {
+    return books.map((book) => (
+      <MyCard
+        key={nanoid()}
+        title={book.title}
+        img={book.img}
+        price={book.price}
+        category={book.category}
+      />
+    ));
   }
 
   return (
     <>
-      <InputSearch filterBooks={filterBooks}></InputSearch>
+      <InputSearch onSubmit={filterBooks}></InputSearch>
       <Container className="mt-5">
         <Row>
           {loading ? (
             <div className="text-center fs-1">Loading...</div>
+          ) : filteredBooks.length > 0 ? (
+            displayCards(filteredBooks)
           ) : (
-            (filteredBooks.length > 0 ? filteredBooks : books).map((book) => (
-              <MyCard
-                key={nanoid()}
-                title={book.title}
-                img={book.img}
-                price={book.price}
-                category={book.category}
-              />
-            ))
+            noBookFound()
           )}
         </Row>
       </Container>

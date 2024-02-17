@@ -8,17 +8,26 @@ import {
   Container,
 } from "react-bootstrap";
 
-function InputSearch({ filterBooks }) {
+function InputSearch({ onSubmit }) {
   const [input, setInput] = useState("");
+  const [isActive, setIsActive] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
-    filterBooks(input);
+    if (isActive) {
+      onSubmit(input);
+    }
   }
 
-  function handleChange(e) {
-    const inputValue = e.target.value;
-    setInput(inputValue);
+  function handleChange({ target: { value } }) {
+    // const inputValue = e.target.value;
+    // setInput(inputValue);
+    setInput(value);
+    if (input.length > 0) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
   }
 
   return (
@@ -26,11 +35,7 @@ function InputSearch({ filterBooks }) {
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col xs md lg="3">
-            <FormControl
-              placeholder="Search..."
-              value={input}
-              onChange={handleChange}
-            />
+            <FormControl placeholder="Search..." onChange={handleChange} />
           </Col>
           <Col>
             <Button type="submit" variant="primary">
