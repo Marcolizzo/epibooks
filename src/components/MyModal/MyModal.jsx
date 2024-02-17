@@ -166,18 +166,6 @@ function MyModal({ show, handleClose, elementId }) {
                 </div>
 
                 <div className="d-flex gap-2 mt-2">
-                  <Button
-                    variant="primary"
-                    onClick={() => startEdit(index, comment)}
-                  >
-                    {isEditing ? "Cancel" : "Edit"}
-                  </Button>
-                  <Button
-                    variant="danger"
-                    onClick={() => deleteComment(comment._id)}
-                  >
-                    Delete
-                  </Button>
                   {editIndex !== index ||
                     (isEditing && (
                       <Button
@@ -189,6 +177,18 @@ function MyModal({ show, handleClose, elementId }) {
                         Save
                       </Button>
                     ))}
+                  <Button
+                    variant="primary"
+                    onClick={() => startEdit(index, comment)}
+                  >
+                    {editIndex !== index || !isEditing ? "Edit" : "Cancel"}
+                  </Button>
+                  <Button
+                    variant="danger"
+                    onClick={() => deleteComment(comment._id)}
+                  >
+                    Delete
+                  </Button>
                 </div>
               </ListGroup.Item>
             ))}

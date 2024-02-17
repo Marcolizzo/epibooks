@@ -34,7 +34,7 @@ function MyCard({ title, img, price, category, onClick, id }) {
           )}
         </Card.Body>
       </Card>
-      <MyModal show={showModal} handleClose={handleCloseModal} elementId={id}/>
+      <MyModal show={showModal} handleClose={handleCloseModal} elementId={id} />
     </Col>
   );
 }

@@ -20,11 +20,11 @@ function Main() {
         const res = await axios.get(url, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        const twentyBooks = res.data.slice(0, 20);
+        const data = res.data;
 
         setLoading(false);
-        setBooks(twentyBooks);
-        setFilteredBooks(twentyBooks);
+        setBooks(data);
+        setFilteredBooks(data);
       } catch (error) {
         console.error(error);
       }
