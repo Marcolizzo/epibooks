@@ -1,4 +1,4 @@
-import "./Link.module.css";
+import "./Link.css";
 
 function Link(props) {
   return (

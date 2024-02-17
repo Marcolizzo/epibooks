@@ -8,7 +8,7 @@ import InputSearch from "../InputSearch/InputSearch";
 function Main() {
   const url = "https://striveschool-api.herokuapp.com/books";
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk4MTMzZDQyNDc2YzAwMTg3NjUzYmQiLCJpYXQiOjE3MDgxNjg3NzIsImV4cCI6MTcwOTM3ODM3Mn0.h1crc0D5lyjALWkwViBS0eOJQR3BO3MLmuG_xRJj3yY";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk4MTMzZDQyNDc2YzAwMTg3NjUzYmQiLCJpYXQiOjE3MDgxODg1MzUsImV4cCI6MTcwOTM5ODEzNX0.K3EZEBj4BIsIUPc12aMX8eLl06_DRb-24KOqboJ0_co";
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filteredBooks, setFilteredBooks] = useState([]);
@@ -65,6 +65,7 @@ function Main() {
         img={book.img}
         price={book.price}
         category={book.category}
+        id={book.asin}
       />
     ));
   }
