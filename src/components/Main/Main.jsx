@@ -12,11 +12,6 @@ import {
 } from "../../reducers/books/booksSlice";
 
 function Main() {
-  const url = "https://striveschool-api.herokuapp.com/books";
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk4MTMzZDQyNDc2YzAwMTg3NjUzYmQiLCJpYXQiOjE3MDgxODg1MzUsImV4cCI6MTcwOTM5ODEzNX0.K3EZEBj4BIsIUPc12aMX8eLl06_DRb-24KOqboJ0_co";
-  // const [books, setBooks] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
   const [filteredBooks, setFilteredBooks] = useState([]);
 
   const books = useSelector(allBooks);
@@ -27,25 +22,6 @@ function Main() {
     dispatch(getBooks());
     setFilteredBooks(books);
   }, []);
-
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const res = await axios.get(url, {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       });
-  //       const data = res.data;
-
-  //       setLoading(false);
-  //       setBooks(data);
-  //       setFilteredBooks(data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   fetch();
-  // }, []);
 
   function filterBooks(input) {
     let filtered;

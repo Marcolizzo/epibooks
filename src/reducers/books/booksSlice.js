@@ -8,22 +8,25 @@ const initialState = {
 }
 
 const url = "https://striveschool-api.herokuapp.com/books";
+const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk4MTMzZDQyNDc2YzAwMTg3NjUzYmQiLCJpYXQiOjE3MDgxODg1MzUsImV4cCI6MTcwOTM5ODEzNX0.K3EZEBj4BIsIUPc12aMX8eLl06_DRb-24KOqboJ0_co";
+
 
 export const getBooks = createAsyncThunk(
     'books/GETBooks',
-    async() => {
+    async () => {
         try {
             const res = await axios.get(url)
             return await res.data
         } catch (e) {
             console.log(e)
-            throw(e)
+            throw (e)
         }
     }
 )
 
 const booksSlice = createSlice({
-    name:'books',
+    name: 'books',
     initialState,
     extraReducers: (builder) => {
         builder
@@ -31,12 +34,12 @@ const booksSlice = createSlice({
                 state.isLoading = true
                 state.error = null
             })
-            .addCase(getBooks.fulfilled, (state, action)=>{
+            .addCase(getBooks.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.books = action.payload
                 state.error = null
             })
-            .addCase(getBooks.rejected, (state)=>{
+            .addCase(getBooks.rejected, (state) => {
                 state.isLoading = false
                 state.error = 'Ops, qualcosa è andato storto'
             })

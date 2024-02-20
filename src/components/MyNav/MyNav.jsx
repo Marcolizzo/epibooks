@@ -2,6 +2,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Link from "../Link/Link";
+import { Form, Button } from "react-bootstrap";
 
 function MyNav() {
   return (
@@ -24,6 +25,15 @@ function MyNav() {
             text="Browse"
           />
         </Nav>
+        <Form className="d-flex">
+          <Form.Control
+            type="search"
+            placeholder="Search"
+            className="me-2"
+            aria-label="Search"
+          />
+          <Button variant="outline-success">Search</Button>
+        </Form>
       </Container>
     </Navbar>
   );
