@@ -3,6 +3,7 @@ import axios from "axios";
 
 const initialState = {
     books: [],
+    filteredBooks: [],
     isLoading: false,
     error: null
 }
@@ -16,7 +17,9 @@ export const getBooks = createAsyncThunk(
     'books/GETBooks',
     async () => {
         try {
-            const res = await axios.get(url)
+            const res = await axios.get(url, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            })
             return await res.data
         } catch (e) {
             console.log(e)
@@ -28,6 +31,18 @@ export const getBooks = createAsyncThunk(
 const booksSlice = createSlice({
     name: 'books',
     initialState,
+    reducers: {
+        filterBooks: (state, action) => {
+            const input = action.payload.toLowerCase()
+            if (input === "") {
+                state.filteredBooks = [...state.books];
+            } else {
+                state.filteredBooks = state.books.filter((book => {
+                    return book.title.toLowerCase().includes(input);
+                }))
+            }
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getBooks.pending, (state) => {
@@ -37,6 +52,7 @@ const booksSlice = createSlice({
             .addCase(getBooks.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.books = action.payload
+                state.filteredBooks = action.payload
                 state.error = null
             })
             .addCase(getBooks.rejected, (state) => {
@@ -46,8 +62,9 @@ const booksSlice = createSlice({
     }
 })
 
-export const allBooks = (state) => state.booksData.books
+export const allBooks = (state) => state.booksData.filteredBooks
 export const isAllBooksLoading = (state) => state.booksData.isLoading
 export const isAllBooksError = (state) => state.booksData.error
+export const {filterBooks} = booksSlice.actions
 
 export default booksSlice.reducer

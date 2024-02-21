@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MyCard from "../MyCard/MyCard";
-import axios from "axios";
-import { Alert, Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { nanoid } from "nanoid";
-import InputSearch from "../InputSearch/InputSearch";
 import { useDispatch, useSelector } from "react-redux";
 import {
   allBooks,
@@ -12,7 +10,6 @@ import {
 } from "../../reducers/books/booksSlice";
 
 function Main() {
-  const [filteredBooks, setFilteredBooks] = useState([]);
 
   const books = useSelector(allBooks);
   const isLoading = useSelector(isAllBooksLoading);
@@ -20,25 +17,7 @@ function Main() {
 
   useEffect(() => {
     dispatch(getBooks());
-    setFilteredBooks(books);
-  }, []);
-
-  function filterBooks(input) {
-    let filtered;
-
-    if (isInputEmpty(input)) {
-      setFilteredBooks(books);
-    } else {
-      filtered = books.filter((book) =>
-        book.title.toLowerCase().includes(input.toLowerCase())
-      );
-      setFilteredBooks(filtered);
-    }
-  }
-
-  function isInputEmpty(input) {
-    return input === "";
-  }
+  }, [dispatch]);
 
   function noBookFound() {
     return (
@@ -48,7 +27,7 @@ function Main() {
     );
   }
 
-  function displayCards(books) {
+  function displayBooks(books) {
     return books.map((book) => (
       <MyCard
         key={nanoid()}
@@ -63,13 +42,12 @@ function Main() {
 
   return (
     <>
-      <InputSearch onSubmit={filterBooks}></InputSearch>
       <Container className="mt-5">
         <Row>
           {isLoading && <div className="text-center fs-1">Loading...</div>}
           {!isLoading &&
-            (filteredBooks.length > 0
-              ? displayCards(filteredBooks)
+            (books.length > 0
+              ? displayBooks(books)
               : noBookFound())}
         </Row>
       </Container>
