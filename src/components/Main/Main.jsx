@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import MyCard from "../MyCard/MyCard";
 import { Container, Row, Col } from "react-bootstrap";
 import { nanoid } from "nanoid";

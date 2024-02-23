@@ -108,7 +108,7 @@ function MyModal({ show, handleClose, elementId }) {
       fetchComments();
       setEditedComments(comments.map((comment) => comment.comment));
     }
-  }, [show]);
+  }, [show, fetchComments(), comments]);
 
   return (
     <>
