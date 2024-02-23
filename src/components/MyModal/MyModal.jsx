@@ -16,7 +16,7 @@ function MyModal({ show, handleClose, elementId }) {
   const [editedComments, setEditedComments] = useState([]);
   const [editedRating, setEditedRating] = useState(0);
 
-  const fetchComments = useCallback(async () => {
+  async function fetchComments() {
     const url = `https://striveschool-api.herokuapp.com/api/books/${elementId}/comments/`;
     try {
       const response = await axios.get(url, {
@@ -27,7 +27,7 @@ function MyModal({ show, handleClose, elementId }) {
     } catch (error) {
       console.error(error);
     }
-  }, [elementId, token]);
+  };
 
   async function addComment() {
     const url = "https://striveschool-api.herokuapp.com/api/comments";
@@ -108,7 +108,7 @@ function MyModal({ show, handleClose, elementId }) {
       fetchComments();
       setEditedComments(comments.map((comment) => comment.comment));
     }
-  }, [show, comments, fetchComments]);
+  }, [show]);
 
   return (
     <>
