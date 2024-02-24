@@ -8,16 +8,15 @@ import { filterBooks } from "../../reducers/books/booksSlice";
 import { useDispatch } from "react-redux";
 
 function MyNav() {
-
   const [input, setInput] = useState("");
   const [isActive, setIsActive] = useState(false);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   function handleSubmit(e) {
     e.preventDefault();
     if (isActive) {
-      dispatch(filterBooks(input)); 
+      dispatch(filterBooks(input));
     }
   }
 
@@ -58,7 +57,9 @@ function MyNav() {
             aria-label="Search"
             onChange={handleChange}
           />
-          <Button variant="outline-success" type="submit">Search</Button>
+          <Button variant="outline-success" type="submit">
+            Search
+          </Button>
         </Form>
       </Container>
     </Navbar>

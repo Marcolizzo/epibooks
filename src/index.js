@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Provider } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { SelectedCard } from './components/Context/selected';
 
 //import di tutti i reducer
 import booksReducer from '../src/reducers/books/booksSlice'
@@ -22,7 +23,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <SelectedCard>
+        <App />
+      </SelectedCard>
     </Provider>
   </React.StrictMode>
 );

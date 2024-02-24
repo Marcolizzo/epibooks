@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import MyCard from "../MyCard/MyCard";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,12 +8,14 @@ import {
   getBooks,
   isAllBooksLoading,
 } from "../../reducers/books/booksSlice";
+import CommentSection from "../CommentSection/CommentSection";
+import { selectedCardContext } from "../Context/selected";
 
 function Main() {
-
   const books = useSelector(allBooks);
   const isLoading = useSelector(isAllBooksLoading);
   const dispatch = useDispatch();
+  const { selectedCard } = useContext(selectedCardContext);
 
   useEffect(() => {
     dispatch(getBooks());
@@ -42,15 +44,18 @@ function Main() {
 
   return (
     <>
-      <Container className="mt-5">
-        <Row>
-          {isLoading && <div className="text-center fs-1">Loading...</div>}
-          {!isLoading &&
-            (books.length > 0
-              ? displayBooks(books)
-              : noBookFound())}
-        </Row>
-      </Container>
+      <Row className="mx-5">
+        <Col xs={6} sm={6} md={7} lg={8}>
+          <Row>
+            {isLoading && <div className="text-center fs-1">Loading...</div>}
+            {!isLoading &&
+              (books.length > 0 ? displayBooks(books) : noBookFound())}
+          </Row>
+        </Col>
+        <Col xs={6} sm={6} md={5} lg={4}>
+          <CommentSection elementId={selectedCard} />
+        </Col>
+      </Row>
     </>
   );
 }

@@ -1,3 +1,4 @@
+import { Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useEffect, useState, useCallback } from "react";
@@ -5,7 +6,7 @@ import { Form, ListGroup } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 import axios from "axios";
 
-function MyModal({ show, handleClose, elementId }) {
+function CommentSection({ elementId }) {
   const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk4MTMzZDQyNDc2YzAwMTg3NjUzYmQiLCJpYXQiOjE3MDgxODg1MzUsImV4cCI6MTcwOTM5ODEzNX0.K3EZEBj4BIsIUPc12aMX8eLl06_DRb-24KOqboJ0_co`;
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
@@ -104,99 +105,92 @@ function MyModal({ show, handleClose, elementId }) {
   }
 
   useEffect(() => {
-    if (show) {
-      fetchComments();
-      setEditedComments(comments.map((comment) => comment.comment));
-    }
-  }, [show]);
+    fetchComments();
+    setEditedComments(comments.map((comment) => comment.comment));
+  }, [elementId]);
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Feedback</Modal.Title>
-        </Modal.Header>
+      <Modal.Header>
+        <Modal.Title>Feedback</Modal.Title>
+      </Modal.Header>
 
-        <Modal.Body>
-          <h6>Add comment:</h6>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          ></Form.Control>
+      <Modal.Body>
+        <h6>Add comment:</h6>
+        <Form.Control
+          as="textarea"
+          rows={3}
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        ></Form.Control>
 
-          <h6 className="mt-2">Rate:</h6>
-          <Rating size={25} key={ratingKey} onClick={setRating}></Rating>
+        <h6 className="mt-2">Rate:</h6>
+        <Rating size={25} key={ratingKey} onClick={setRating}></Rating>
 
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="warning" onClick={addComment}>
-              Save
-            </Button>
-          </Modal.Footer>
+        <Modal.Footer>
+          <Button variant="warning" onClick={addComment}>
+            Send
+          </Button>
+        </Modal.Footer>
 
-          <h5 className="mt-4">Other Feedbacks:</h5>
-          <ListGroup>
-            {comments.map((comment, index) => (
-              <ListGroup.Item key={index}>
-                <div>
-                  <b>Rating:</b>
-                  <Rating
-                    size={22}
-                    readonly={editIndex !== index || !isEditing}
-                    initialValue={comment.rate}
-                    onClick={setEditedRating}
-                  ></Rating>
-                </div>
+        <h5 className="mt-4">Other Feedbacks:</h5>
+        <ListGroup>
+          {comments.map((comment, index) => (
+            <ListGroup.Item key={index}>
+              <div>
+                <b>Rating:</b>
+                <Rating
+                  size={22}
+                  readonly={editIndex !== index || !isEditing}
+                  initialValue={comment.rate}
+                  onClick={setEditedRating}
+                ></Rating>
+              </div>
 
-                <div>
-                  {" "}
-                  <b>Comment:</b>
-                  <Form.Control
-                    as="textarea"
-                    disabled={editIndex !== index || !isEditing}
-                    value={isEditing ? editedComments[index] : comment.comment}
-                    onChange={(e) => {
-                      handleOnChangeInput(e, index);
-                    }}
-                  ></Form.Control>
-                </div>
+              <div>
+                {" "}
+                <b>Comment:</b>
+                <Form.Control
+                  as="textarea"
+                  disabled={editIndex !== index || !isEditing}
+                  value={isEditing ? editedComments[index] : comment.comment}
+                  onChange={(e) => {
+                    handleOnChangeInput(e, index);
+                  }}
+                ></Form.Control>
+              </div>
 
-                <div className="d-flex gap-2 mt-2">
-                  {editIndex !== index ||
-                    (isEditing && (
-                      <Button
-                        variant="warning"
-                        onClick={() => {
-                          saveEditedComment(comment, index);
-                        }}
-                      >
-                        Save
-                      </Button>
-                    ))}
-                  <Button
-                    variant="primary"
-                    onClick={() => startEdit(index, comment)}
-                  >
-                    {editIndex !== index || !isEditing ? "Edit" : "Cancel"}
-                  </Button>
-                  <Button
-                    variant="danger"
-                    onClick={() => deleteComment(comment._id)}
-                  >
-                    Delete
-                  </Button>
-                </div>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
-        </Modal.Body>
-      </Modal>
+              <div className="d-flex gap-2 mt-2">
+                {editIndex !== index ||
+                  (isEditing && (
+                    <Button
+                      variant="warning"
+                      onClick={() => {
+                        saveEditedComment(comment, index);
+                      }}
+                    >
+                      Save
+                    </Button>
+                  ))}
+                <Button
+                  variant="primary"
+                  onClick={() => startEdit(index, comment)}
+                >
+                  {editIndex !== index || !isEditing ? "Edit" : "Cancel"}
+                </Button>
+                <Button
+                  variant="danger"
+                  onClick={() => deleteComment(comment._id)}
+                >
+                  Delete
+                </Button>
+              </div>
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+      </Modal.Body>
     </>
   );
 }
 
-export default MyModal;
+export default CommentSection;

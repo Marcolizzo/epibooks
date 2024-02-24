@@ -1,25 +1,26 @@
 import Card from "react-bootstrap/Card";
 import { Col, Button } from "react-bootstrap";
 import "./MyCard.css";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import MyModal from "../MyModal/MyModal";
+import { selectedCardContext } from "../Context/selected";
 
-function MyCard({ title, img, price, category, onClick, id }) {
-  const [isSelected, setIsSelected] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+function MyCard({ title, img, price, category, id }) {
+  const { selectedCard, setSelectedCard } = useContext(selectedCardContext);
+  // const [isSelected, setIsSelected] = useState("");
+  // const [showModal, setShowModal] = useState(false);
 
   function handleClick() {
-    setIsSelected(!isSelected);
-    // if (onClick) onClick();
+    setSelectedCard(id);
   }
 
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+  // const handleShowModal = () => setShowModal(true);
+  // const handleCloseModal = () => setShowModal(false);
 
   return (
-    <Col sm={12} md={6} lg={3} className="mb-3">
+    <Col sm={12} md={6} lg={4} xl={3} xxl={2} className="mb-3">
       <Card
-        className={`card ${isSelected ? "changeBorder" : ""}`}
+        className={`card ${selectedCard === id ? "changeBorder" : ""}`}
         onClick={handleClick}
       >
         <Card.Img variant="top" src={img} />
@@ -27,14 +28,14 @@ function MyCard({ title, img, price, category, onClick, id }) {
           <Card.Title>{title}</Card.Title>
           <Card.Text>{price}$</Card.Text>
           <Card.Text>{category}</Card.Text>
-          {isSelected && (
+          {/* {isSelected && (
             <Button variant="warning" onClick={handleShowModal}>
               Add Feedback
             </Button>
-          )}
+          )} */}
         </Card.Body>
       </Card>
-      <MyModal show={showModal} handleClose={handleCloseModal} elementId={id} />
+      {/* <MyModal show={showModal} handleClose={handleCloseModal} elementId={id} /> */}
     </Col>
   );
 }

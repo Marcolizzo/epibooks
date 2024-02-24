@@ -65,6 +65,6 @@ const booksSlice = createSlice({
 export const allBooks = (state) => state.booksData.filteredBooks
 export const isAllBooksLoading = (state) => state.booksData.isLoading
 export const isAllBooksError = (state) => state.booksData.error
-export const {filterBooks} = booksSlice.actions
+export const { filterBooks } = booksSlice.actions
 
 export default booksSlice.reducer
