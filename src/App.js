@@ -1,17 +1,19 @@
-import MyNav from "./components/MyNav/MyNav";
-import MyFooter from "./components/MyFooter/MyFooter";
-import Main from "./components/Main/Main";
-import MyAlert from "./components/MyAlert/MyAlert";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Homepage from "./components/pages/Homepage";
+import BookDetail from "./components/pages/BookDetail";
+import NotFound from "./components/pages/NotFound";
 
 
 function App() {
   return (
-    <>
-      <MyNav />
-      <MyAlert />
-      <Main />
-      <MyFooter />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<Homepage />} />
+        <Route path="/book/:asin" element={<BookDetail />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

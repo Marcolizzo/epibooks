@@ -2,16 +2,21 @@ import Card from "react-bootstrap/Card";
 import { Col, Button } from "react-bootstrap";
 import "./MyCard.css";
 import React, { useContext, useState } from "react";
-import MyModal from "../MyModal/MyModal";
 import { selectedCardContext } from "../Context/selected";
+import { useNavigate } from "react-router-dom";
 
 function MyCard({ title, img, price, category, id }) {
   const { selectedCard, setSelectedCard } = useContext(selectedCardContext);
+  const navigate = useNavigate();
   // const [isSelected, setIsSelected] = useState("");
   // const [showModal, setShowModal] = useState(false);
 
   function handleClick() {
     setSelectedCard(id);
+  }
+
+  function handleBookDetail() {
+    navigate(`/book/${id}`);
   }
 
   // const handleShowModal = () => setShowModal(true);
@@ -28,11 +33,11 @@ function MyCard({ title, img, price, category, id }) {
           <Card.Title>{title}</Card.Title>
           <Card.Text>{price}$</Card.Text>
           <Card.Text>{category}</Card.Text>
-          {/* {isSelected && (
-            <Button variant="warning" onClick={handleShowModal}>
-              Add Feedback
+          {selectedCard === id && (
+            <Button variant="warning" onClick={handleBookDetail}>
+              Details
             </Button>
-          )} */}
+          )}
         </Card.Body>
       </Card>
       {/* <MyModal show={showModal} handleClose={handleCloseModal} elementId={id} /> */}
