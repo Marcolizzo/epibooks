@@ -45,15 +45,12 @@ function Main() {
   return (
     <>
       <Row className="mx-5">
-        <Col xs={6} sm={6} md={7} lg={8}>
+        <Col>
           <Row>
             {isLoading && <div className="text-center fs-1">Loading...</div>}
             {!isLoading &&
               (books.length > 0 ? displayBooks(books) : noBookFound())}
           </Row>
-        </Col>
-        <Col xs={6} sm={6} md={5} lg={4}>
-          <CommentSection elementId={selectedCard} />
         </Col>
       </Row>
     </>
