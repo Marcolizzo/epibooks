@@ -6,8 +6,7 @@ function MyAlert() {
   const [show, setShow] = useState(true);
 
   return (
-    <>
-      <Alert show={show} variant="success">
+      <Alert show={show} variant="success" data-testid="element">
         <Alert.Heading className="text-center">Welcome!</Alert.Heading>
         <p className="text-center">
           This is a test alert! You can safely ignore it.
@@ -19,7 +18,6 @@ function MyAlert() {
           </Button>
         </div>
       </Alert>
-    </>
   );
 }
 
