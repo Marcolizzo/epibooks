@@ -1,7 +1,6 @@
-import { Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { Form, ListGroup } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 import axios from "axios";
@@ -110,7 +109,7 @@ function CommentSection({ elementId }) {
   }, [elementId]);
 
   return (
-    <>
+    <div data-testid="commentsArea">
       <Modal.Header>
         <Modal.Title>Feedback</Modal.Title>
       </Modal.Header>
@@ -134,7 +133,7 @@ function CommentSection({ elementId }) {
         </Modal.Footer>
 
         <h5 className="mt-4">Other Feedbacks:</h5>
-        <ListGroup>
+        <ListGroup data-testid="commentsArea">
           {comments.map((comment, index) => (
             <ListGroup.Item key={index}>
               <div>
@@ -189,7 +188,7 @@ function CommentSection({ elementId }) {
           ))}
         </ListGroup>
       </Modal.Body>
-    </>
+    </div>
   );
 }
 

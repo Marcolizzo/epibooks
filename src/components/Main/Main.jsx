@@ -8,7 +8,6 @@ import {
   getBooks,
   isAllBooksLoading,
 } from "../../reducers/books/booksSlice";
-import CommentSection from "../CommentSection/CommentSection";
 import { selectedCardContext } from "../Context/selected";
 
 function Main() {
@@ -38,6 +37,7 @@ function Main() {
         price={book.price}
         category={book.category}
         id={book.asin}
+        data-testid="book-cards"
       />
     ));
   }

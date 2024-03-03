@@ -6,14 +6,14 @@ function MyAlert() {
   const [show, setShow] = useState(true);
 
   return (
-      <Alert show={show} variant="success" data-testid="element">
+      <Alert show={show} variant="success">
         <Alert.Heading className="text-center">Welcome!</Alert.Heading>
         <p className="text-center">
           This is a test alert! You can safely ignore it.
         </p>
         <hr />
         <div className="d-flex justify-content-center">
-          <Button onClick={() => setShow(false)} variant="outline-success">
+          <Button onClick={() => setShow(false)} variant="outline-success" data-testid="closeButton">
             Close me
           </Button>
         </div>

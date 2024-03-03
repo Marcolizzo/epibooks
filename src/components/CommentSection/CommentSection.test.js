@@ -1,10 +1,11 @@
-// import React from "react";
-// import { fireEvent, screen, render } from "@testing-library/react";
-// import CommentSection from "./CommentSection";
+import React from "react";
+import { screen, render, waitFor } from "@testing-library/react";
+import CommentSection from "./CommentSection";
+import "@testing-library/jest-dom"
 
-// test('il componente CommentSection è stato montato correttamente', () => {
-//     render(<CommentSection />)
-//     const title = screen.queryByTestId("title")
-
-//     expect(title).toHaveTextContent("Feedback")
-// })
+describe("CommentSection", () => {
+    test("render Comments area", () => {
+        render(<CommentSection />);
+        expect(screen.getByTestId("commentsArea")).toBeInTheDocument();
+    })
+})
